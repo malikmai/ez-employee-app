@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>All Employees</title>
+  </head>
+  <body>
+    <h1>Employee List</h1>
+    <a href="/">Home</a>
+    <ul>
+      <% employees.forEach(function(employee) { %>
+      <li>
+        <%= employee.name %> - <%= employee.department %>
+        <a href="/employees/<%= employee._id %>">View</a>
+        <a href="/employees/<%= employee._id %>/edit">Edit</a>
+      </li>
+      <% }) %>
+    </ul>
+    <a href="/employees/new">Add New Employee</a>
+  </body>
+</html>
