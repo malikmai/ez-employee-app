@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Delete Employee Data</title>
+  </head>
+  <body>
+    <h1>Are you sure you want to delete this data?</h1>
+    <div>
+      <h2><%= employee.firstName %> <%= employee.lastName %></h2>
+      <p>Title: <%= employee.title %></p>
+      <p>Department: <%= employee.department %></p>
+      <p>Email: <%= employee.email %></p>
+      <p>Phone: <%= employee.phone %></p>
+      <p>Salary: $<%= employee.salary.toLocaleString() %></p>
+
+      <form action="/employees/<%= employee._id %>?_method=POST" method="POST">
+        <button type="submit">Delete</button>
+      </form>
+      <button onclick="location.href='/employees/<%= employee._id %>/edit'">
+        Cancel
+      </button>
+    </div>
+  </body>
+</html>
