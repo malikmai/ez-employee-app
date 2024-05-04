@@ -27,6 +27,7 @@ app.get("/", (req, res) => {
   res.render("home");
 });
 
+//Get for Index
 app.get("/employees", async (req, res) => {
   try {
     const allEmployees = await EmployeeBook.find({});
@@ -36,59 +37,43 @@ app.get("/employees", async (req, res) => {
     res.status(500).send("Error retrieving employee");
   }
 });
+
+// Get for New
 app.get("/employees/new", (req, res) => {
-  res.render("employees/new");
+  res.render("employees/new.ejs");
 });
 
-app.post("/employees/:employeeId", async (req, res) => {
-  const { employeeId } = req.params;
-  const { firstName, lastName, title, department, email, phone, salary } =
-    req.body;
-  try {
-    await EmployeeBook.findByIdAndUpdate(employeeId, {
-      firstName,
-      lastName,
-      title,
-      department,
-      email,
-      phone,
-      salary,
-    });
-    res.redirect("/employees/" + employeeId);
-  } catch (error) {
-    console.error("Error updating employee:", error);
-    res.status(500).send("Error updating employee");
-  }
-});
-
-// Route to handle the Edit/Update (PUT) operations
-app.get("/employees/:employeeId/edit", async (req, res) => {
+// Get for Show
+app.get("/employees/:employeeId", async (req, res) => {
   try {
     const foundEmployee = await EmployeeBook.findById(req.params.employeeId);
-    if (!foundEmployee) {
-      console.log("Error finding employee:", error);
-      return res.status(404).send("Error finding employee");
-    }
-    res.render("employees/edit.ejs", { employee: foundEmployee });
+    res.render("employees/show.ejs", { employee: foundEmployee });
   } catch (error) {
-    console.error("Error finding employee:", error);
-    res.status(500).send("Error finding employee");
+    console.error("Failed to retrieve employee:", error);
+    res.status(500).send("Failed to retrieve employee");
   }
 });
+
+// Get for Edit
+app.get("/employees/:employeeId/edit", async (req, res) => {
+  try {
+      const foundEmployee = await EmployeeBook.findById(req.params.employeeId);
+      if (!foundEmployee) {
+          console.log("Error retrieving employee");
+          return res.status(404).send("Employee not found.");
+      }
+      res.render("employees/edit", { employee: foundEmployee });
+  } catch (error) {
+      console.error("Failed to retrieve employee:", error);
+      res.status(500).send("Failed to retrieve employee");
+  }
+});
+
 // Route to handle creating a new employee
 app.post("/employees", async (req, res) => {
-  const { firstName, lastName, title, department, email, phone, salary } =
-    req.body;
+  const { firstName, lastName, title, department, email, phone, salary } = req.body;
   try {
-    const newEmployee = new EmployeeBook({
-      firstName,
-      lastName,
-      title,
-      department,
-      email,
-      phone,
-      salary,
-    });
+    const newEmployee = new EmployeeBook({ firstName, lastName, title, department, email, phone, salary, });
     await newEmployee.save();
     res.redirect("/employees");
   } catch (error) {
@@ -97,26 +82,34 @@ app.post("/employees", async (req, res) => {
   }
 });
 
-// Route to hand the deletion operations
-app.get("/employees/:employeeId/delete", async (req, res) => {
+// Post for Edit
+app.post("/employees/:employeeId/edit", async (req, res) => {
+  const { employeeId } = req.params;
+  const { firstName, lastName, title, department, email, phone, salary } =
+    req.body;
   try {
-    const foundEmployee = await EmployeeBook.findById(req.params.employeeId);
-    if (!foundEmployee) {
-      return res.status(404).send("Employee not found.");
-    }
-    res.render("employees/delete", { employee: foundEmployee });
+    await EmployeeBook.findByIdAndUpdate(employeeId, {
+      firstName, lastName, title, department, email, phone, salary,
+    });
+    res.redirect("/employees/" + employeeId);
   } catch (error) {
-    console.error("Error finding employee for deletion:", error);
-    res.status(500).send("Error retrieving employee details.");
+    console.error("Error updating employee:", error);
+    res.status(500).send("Error updating employee");
   }
 });
-app.delete("/employees/:employeeId", async (req, res) => {
+
+// Route to handle the Update (PUT) operation
+app.put("/employees/:employeeId", async (req, res) => {
+  const { employeeId } = req.params;
+  const { firstName, lastName, title, department, email, phone, salary } = req.body;
   try {
-    await EmployeeBook.findByIdAndRemove(req.params.employeeId);
-    res.redirect("/employees");
+      await EmployeeBook.findByIdAndUpdate(employeeId, {
+          firstName, lastName, title, department, email, phone, salary
+      }, { new: true });  // ensure that the updated document is returned
+      res.redirect("/employees/" + employeeId);
   } catch (error) {
-    console.error("Error deleting employee:", error);
-    res.status(500).send("Failed to delete employee.");
+      console.error("Error updating employee:", error);
+      res.status(500).send("Error updating employee");
   }
 });
 
