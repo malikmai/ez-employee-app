@@ -11,14 +11,11 @@
       <h2><%= employee.firstName %> <%= employee.lastName %></h2>
       <p>Title: <%= employee.title %></p>
       <p>Department: <%= employee.department %></p>
-      <p>Email: <%= employee.email %></p>
-      <p>Phone: <%= employee.phone %></p>
-      <p>Salary: $<%= employee.salary.toLocaleString() %></p>
 
-      <form action="/employees/<%= employee._id %>?_method=POST" method="POST">
+      <form action="/employees/<%= employee._id %>?_method=DELETE" method="POST">
         <button type="submit">Delete</button>
-      </form>
-      <button onclick="location.href='/employees/<%= employee._id %>/edit'">
+    </form>
+      <button onclick="location.href='/employees/<%= employee._id %>/'">
         Cancel
       </button>
     </div>

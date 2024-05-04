@@ -24,8 +24,8 @@
         </div>
         <div class="employeeDataSheetButtons">
         <button class="employeeEditButton"><a href="/employees/<%= employee._id %>/edit">Edit Employee</a></button>
-        <form action="/employees/<%= employee._id %>?_method=DELETE" method="post">
-            <button type="submit">Delete Employee</button>
+        <form action="/employees/<%= employee._id %>/delete" method="get">
+            <button type="submit">Delete</button>
         </form>
     </div>
     <% } else { %>

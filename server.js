@@ -69,6 +69,21 @@ app.get("/employees/:employeeId/edit", async (req, res) => {
   }
 });
 
+// Get for Delete Confirmation
+app.get("/employees/:employeeId/delete", async (req, res) => {
+  try {
+      const foundEmployee = await EmployeeBook.findById(req.params.employeeId);
+      if (!foundEmployee) {
+          return res.status(404).send("Employee not found.");
+      }
+      res.render("employees/delete", { employee: foundEmployee });
+  } catch (error) {
+      console.error("Error finding employee for deletion:", error);
+      res.status(500).send("Error retrieving employee details.");
+  }
+});
+
+
 // Route to handle creating a new employee
 app.post("/employees", async (req, res) => {
   const { firstName, lastName, title, department, email, phone, salary } = req.body;
@@ -110,6 +125,17 @@ app.put("/employees/:employeeId", async (req, res) => {
   } catch (error) {
       console.error("Error updating employee:", error);
       res.status(500).send("Error updating employee");
+  }
+});
+
+// Route to delete an employee
+app.delete("/employees/:employeeId", async (req, res) => {
+  try {
+      await EmployeeBook.findByIdAndDelete(req.params.employeeId);
+      res.redirect("/employees");
+  } catch (error) {
+      console.error("Error deleting employee:", error);
+      res.status(500).send("Failed to delete employee.");
   }
 });
 
