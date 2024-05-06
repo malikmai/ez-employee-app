@@ -23,7 +23,7 @@ To run ezEmployee locally, you'll need Node.js and MongoDB installed on your mac
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/malikMai/ezEmployee.git
+   git clone https://github.com/malikmai/ez-employee-app
    cd ezEmployee
 
 2. **Install dependencies**
