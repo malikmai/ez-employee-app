@@ -83,7 +83,6 @@ app.get("/employees/:employeeId/delete", async (req, res) => {
   }
 });
 
-
 // Route to handle creating a new employee
 app.post("/employees", async (req, res) => {
   const { firstName, lastName, title, department, email, phone, salary } = req.body;

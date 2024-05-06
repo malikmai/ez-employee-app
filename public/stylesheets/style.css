@@ -4,6 +4,9 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
 }
 .welcomeTitle{
     align-self: center;
@@ -52,7 +55,7 @@ h1 {
    padding: 14px;
    display: flex;
 }
-.indexCreateButtonLink, .employeeEditButton {
+.indexCreateButtonLink, .employeeEditButton, .editButtonLink {
     text-decoration: none;
     color: black;
 }
@@ -65,7 +68,7 @@ h1 {
 #yourEmployeesList {
     align-self: flex-start;
     margin-left: 20px;
-    width: 60%; /* Adjust according to your content needs */
+    width: 100%;
     margin-right: 20px;
 }
 .homeInfoBox {
@@ -81,21 +84,22 @@ h1 {
 }
 .content-container {
     display: flex;
-    justify-content: space-between; /* Positions children at opposite ends */
-    align-items: flex-start; /* Aligns children at the top */
-    width: 100%; /* Full width of its parent to utilize maximum available space */
-    padding: 20px; /* Padding for some breathing room around content */
-    box-sizing: border-box; /* Includes padding and border in the element's width and height */
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%; 
+    padding: 20px;
+    
 }
 
 .userTips-container {
-    width: 35%;
+    width: 15%;
     background-color: #2c3e50; 
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
     padding: 20;
 
 }
+
 .indexInfoBox {
     background-color: #ffffff;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -109,15 +113,6 @@ h1 {
     position: static;
 }
 
-
-.company-footer {
-    background-color: #2c3e50;
-    color: #ffffff;
-    text-align: center;
-    padding: 20px 0;
-    width: 100%;
-    margin-top: auto;
-}
 .employeeDataSheet {
     background-color: #ffffff; 
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
@@ -126,6 +121,69 @@ h1 {
     margin: 20px;
     width: calc(50% - 40px);
     align-self: center;
+}
+
+.Form-container {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 80%;
+    max-width: 600px;
+    margin: 20px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 16px;
+    color: #333; 
+}
+
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="number"] {
+    width: calc(100% - 12px); /* Full width of the container minus padding -- ChatGPT*/
+    padding: 6px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+button {
+    padding: 10px 15px;
+    margin-bottom: 10px;
+    background-color: #d6d6d6;
+    color: black;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.indexCreateButtonLink, .editButtonLink {
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #959595;
+}
+
+.editButton-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.company-footer {
+    background-color: #2c3e50;
+    color: #ffffff;
+    text-align: center;
+    padding: 20px 0;
+    width: 100%;
+    margin-top: auto;
 }
 
 .footer-content {
@@ -153,6 +211,13 @@ h1 {
         width: auto;
         position: static;
     }
+    
+
+    .indexSearchBox, .indexSearchButton {
+        display: flex;
+        justify-content: center;
+    }
+
     .footer-content {
         flex-direction: column;
     }
@@ -172,7 +237,7 @@ h1 {
 }
 
 .employeeDataSheet a {
-    color: #0066cc; /* Link color */
+    color: #0066cc;
     text-decoration: none;
 }
 

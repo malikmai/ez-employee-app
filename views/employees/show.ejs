@@ -23,7 +23,7 @@
             <p>Salary: $<%= employee.salary.toLocaleString() %></p>
         </div>
         <div class="employeeDataSheetButtons">
-        <button class="employeeEditButton"><a href="/employees/<%= employee._id %>/edit">Edit Employee</a></button>
+        <button class="employeeEditButton"><a class="editButtonLink" href="/employees/<%= employee._id %>/edit">Edit Employee</a></button>
         <form action="/employees/<%= employee._id %>/delete" method="get">
             <button type="submit">Delete</button>
         </form>
@@ -31,6 +31,7 @@
     <% } else { %>
         <p>Employee not found.</p>
     <% } %>
+    
     <footer>
         <footer class="company-footer">
             <div class="footer-content">
